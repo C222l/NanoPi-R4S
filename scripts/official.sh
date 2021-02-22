@@ -141,7 +141,7 @@ chmod +x ./remove-upx.sh
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 
 git am $GITHUB_WORKSPACE/patches/official/*.patch
-echo -e " Official OpenWrt built on "$(date +%Y.%m.%d)"\n -----------------------------------------------------" >> package/base-files/files/etc/banner
+echo -e " Official OpenWrt built on "$(date +%Y.%m.%d) by C222l"\n -----------------------------------------------------" >> package/base-files/files/etc/banner
 
 # Add luci-app-vssr <M>
 git clone --depth=1 https://github.com/jerrykuku/lua-maxminddb.git
