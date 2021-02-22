@@ -31,7 +31,7 @@ env:
 jobs:
   Build:
     runs-on: ubuntu-18.04
-    if: github.repository == 'LewiVir/NanoPi-R4S'
+    if: github.repository == 'C222l/NanoPi-R4S'
     outputs:
       OPENWRTROOT: ${{ steps.update.outputs.OPENWRTROOT }}
       PLATFORM: ${{ steps.compile.outputs.PLATFORM }}
@@ -177,7 +177,7 @@ jobs:
   Upload:
     needs: [Build]
     runs-on: ubuntu-18.04
-    if: github.repository == 'LewiVir/NanoPi-R4S'
+    if: github.repository == 'C222l/NanoPi-R4S'
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -258,13 +258,6 @@ jobs:
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
           files: ${{ env.FIRMWARE }}/*
-
-      - name: Build & Push Docker Image To Dockerhub
-        run: |
-          cd openwrt/bin/targets/$TARGET/$SUBTARGET/
-          docker import openwrt-rockchip-armv8-friendlyarm_nanopi-r4s-rootfs.tar.gz ${{ secrets.DOCKERHUB_USERNAME }}/openwrt:official
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/openwrt:official
 
       - name: Delete workflow runs
         uses: GitRML/delete-workflow-runs@main
