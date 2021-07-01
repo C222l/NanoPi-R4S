@@ -62,6 +62,7 @@ jobs:
         git config --global user.email "git@github.com"
         git config --global user.name "GitHub"
         git clone $REPO_URL -b $REPO_BRANCH openwrt
+        cd openwrt
 
     - name: Update Feeds
       id: update
@@ -174,7 +175,7 @@ jobs:
         
   Upload:
     needs: [Build]
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     if: github.repository == 'C222l/NanoPi-R4S'
     steps:
       - name: Checkout
